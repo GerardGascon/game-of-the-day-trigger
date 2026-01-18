@@ -1,0 +1,12 @@
+services:
+  workflow-scheduler:
+    build: .
+    container_name: workflow-scheduler
+    env_file:
+      - .env
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - GITHUB_REPOSITORY=GerardGascon/game-of-the-day
+      - GITHUB_WORKFLOW=pick-game.yml
+      - GITHUB_BRANCH=master
+    restart: unless-stopped
