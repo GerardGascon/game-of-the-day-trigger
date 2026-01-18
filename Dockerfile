@@ -1,9 +1,12 @@
-FROM python:3.12-alpine
+FROM alpine:latest
 
-ENV PYTHONUNBUFFERED=1
+RUN apk add --no-cache \
+    github-cli \
+    tzdata \
+    bash
 
-WORKDIR /usr/src/app
-COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY trigger-workflow.sh /usr/src/app/trigger-workflow.sh
+COPY entrypoint.sh /usr/src/app/entrypoint.sh
+RUN chmod +x /usr/src/app/trigger-workflow.sh /usr/src/app/entrypoint.sh
 
-CMD ["python", "main.py"]
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]

@@ -5,6 +5,8 @@ services:
     env_file:
       - .env
     environment:
+      - TZ=Europe/Madrid
+      - CRON_SCHEDULE=0 0 * * *
       - GITHUB_TOKEN=${GITHUB_TOKEN}
       - GITHUB_REPOSITORY=GerardGascon/game-of-the-day
       - GITHUB_WORKFLOW=pick-game.yml
